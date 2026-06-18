@@ -14,7 +14,7 @@ resource "aws_db_instance" "rds"{
     engine_version = "8.0"
 
     # Tailles
-    instance_class = "t3.db.micro"
+    instance_class = "db.t3.micro"
     allocated_storage = 20
 
     # Identifiants
