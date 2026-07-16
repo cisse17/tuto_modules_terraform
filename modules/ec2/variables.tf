@@ -30,3 +30,8 @@ variable "project_name" {
   type = string
   default = "bassirou"
 }
+
+variable "user_data"{
+  type = string
+  description = "script à executer lors du démarrage de l'instance"
+}
