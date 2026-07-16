@@ -2,7 +2,7 @@
 # Security group pour l'instance web
 resource "aws_security_group" "web"{
     name = "web-sg-${var.project_name}-${var.env}"
-    description = "Security group pour notre instance web"
+    description = "Security group for web instance"
     vpc_id = var.vpc_id
 
     ingress {
@@ -47,7 +47,7 @@ resource "aws_security_group" "web"{
 # Security group pour database RDS
 resource "aws_security_group" "rds"{
     name = "rds-sg-${var.project_name}-${var.env}"
-    description = "Security group pour l'instance RDS"
+    description = "Security group for RDS"
     vpc_id = var.vpc_id
 
     ingress {
@@ -73,11 +73,10 @@ resource "aws_security_group" "rds"{
     }
 }
 
-
 # ALB Security Group
 resource "aws_security_group" "alb" {
     name = "alb-sg-${var.project_name}-${var.env}"
-    description = "Security group pour l'ALB"
+    description = "Security group for ALB"
     vpc_id = var.vpc_id
 
     ingress {
@@ -96,6 +95,15 @@ resource "aws_security_group" "alb" {
          cidr_blocks = ["0.0.0.0/0"]
     }
 
+    egress {
+        description = "Allow all outbound traffic"
+        from_port = 0
+        to_port = 0
+        protocol = -1
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+
     tags = {
         Name = "alb-sg-${var.project_name}-${var.env}"
     }
@@ -111,3 +119,4 @@ resource "aws_security_group_rule" "allow_alb_to_web"{
     source_security_group_id = aws_security_group.alb.id
     description = " Allow HTTP/HTTPS traffic from ALB to web instance"
 }
+
