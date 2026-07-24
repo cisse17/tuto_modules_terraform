@@ -30,7 +30,8 @@ resource "aws_db_instance" "rds"{
     # économiques
     skip_final_snapshot = true
     backup_retention_period = 0
-    multi_az = false
+    # multi_az = false # economique
+    multi_az = true
     deletion_protection = false
 
     tags = {
