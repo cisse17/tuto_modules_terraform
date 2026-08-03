@@ -1,0 +1,10 @@
+aws_region    = "eu-west-3"
+ami           = "ami-0e207c18bb303cc68"
+instance_type = "t2.medium"
+key_name      = "terraformcloud"
+db_name       = "ProdDBbassirou"
+db_username   = "ProdAdmin"
+# db_password   = "ProdAdmin123"
+
+project_name = "bassirou"
+env          = "prod"

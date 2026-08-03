@@ -1,0 +1,10 @@
+aws_region    = "eu-west-3"
+ami           = "ami-0e207c18bb303cc68"
+instance_type = "t2.micro"
+key_name      = "terraformcloud"
+db_name       = "DevDBbassirou"
+db_username   = "DevAdmin"
+# db_password   = "DevAdmin123"
+
+project_name = "bassirou"
+env          = "dev"
