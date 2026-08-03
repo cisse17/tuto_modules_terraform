@@ -43,25 +43,25 @@ jobs:
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: ${{ env.TF_VERSION}}
+          terraform_version: ${{ env.TF_VERSION }}
       
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
         working-directory: environments/${{ matrix.environment }}
         run: terraform init
 
       - name: terraform plan
-        working-directory: environments/${{ matrix.environment}}
+        working-directory: environments/${{ matrix.environment }}
         run: |
           terraform plan \
-          -var="db_password=${{ secrets.DB_PASSWORD }}"\
-          -no-color
+            -var="db_password=${{ secrets.DB_PASSWORD }}"\
+            -no-color
   
   terraform-apply:
     name: apply ${{ github.event.inputs.environment }}
@@ -85,7 +85,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
         working-directory: environments/${{ github.event.inputs.environment }}
@@ -94,8 +94,8 @@ jobs:
       - name: terraform apply
         working-directory: environments/${{ github.event.inputs.environment}}
         run: |
-          terraform apply \
-          -var="db_password=${{ secrets.DB_PASSWORD }}"
+          terraform apply -auto-approve \
+            -var="db_password=${{ secrets.DB_PASSWORD }}"
 
 
   terraform-destroy:
@@ -121,7 +121,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: ${{ env.AWS_REGION }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
         working-directory: environments/${{ github.event.inputs.environment }}
@@ -131,4 +131,4 @@ jobs:
         working-directory: environments/${{ github.event.inputs.environment}}
         run: |
           terraform destroy \
-          -var="db_password=${{ secrets.DB_PASSWORD }}"
+            -var="db_password=${{ secrets.DB_PASSWORD }}"
