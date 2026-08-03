@@ -7,4 +7,4 @@ db_username   = "StagingAdmin"
 # db_password   = "StagingAdmin123"
 
 project_name = "bassirou"
-env          = "Staging"
+env          = "staging"

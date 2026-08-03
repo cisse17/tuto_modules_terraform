@@ -61,7 +61,9 @@ jobs:
         run: |
           terraform plan \
             -var="db_password=${{ secrets.DB_PASSWORD }}"\
-            -no-color
+            -no-color\
+            -detailed-exitcode
+        continue-on-error: true
   
   terraform-apply:
     name: apply ${{ github.event.inputs.environment }}
