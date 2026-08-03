@@ -1,0 +1,10 @@
+aws_region    = "eu-west-3"
+ami           = "ami-0e207c18bb303cc68"
+instance_type = "t2.small"
+key_name      = "terraformcloud"
+db_name       = "StagingDBbassirou"
+db_username   = "StagingAdmin"
+# db_password   = "StagingAdmin123"
+
+project_name = "bassirou"
+env          = "Staging"
