@@ -32,6 +32,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
 
+    permissions:
+      id-token: write
+      contents: read 
+
     strategy:
       matrix:
         environment: [dev, staging, prod]
@@ -48,8 +52,9 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: §{{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
@@ -85,8 +90,9 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
@@ -121,8 +127,9 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: §{{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
 
       - name: terraform init
